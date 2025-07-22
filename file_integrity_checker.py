@@ -2,6 +2,7 @@
 import os
 import hashlib
 import json
+import sys
 
 def get_all_files(directory):       # Returns a list of all file paths under the given directory (recursively)
     file_paths = []                 # Creates an empty list to hold file paths.
@@ -41,6 +42,11 @@ if __name__ == "__main__":
     directory = input("Enter the directory to scan: ")
     baseline_file = "hashes.json"
 
+    # Check if auto-update flag is present
+    auto_update = False
+    if len(sys.argv) > 1 and sys.argv[1] == "--auto-update":
+        auto_update = True
+
     if not os.path.exists(baseline_file):
         print("No baseline found. Creating baseline...")
         files = get_all_files(directory)
@@ -55,11 +61,15 @@ if __name__ == "__main__":
         new_hashes = {f: calculate_hash(f) for f in files}
         compare_hashes(old_hashes, new_hashes)
     
-        # ask if user wants to update baseline
-    choice = input("Do you want to update the baseline with current state? (y/n): ").lower()
-    if choice == "y":
-        save_hashes(new_hashes, baseline_file)
-        print("Baseline updated.")
-    else:
-        print("Baseline NOT updated. Keeping original.")
+        if auto_update:
+            print("Auto-update mode: updating baseline automatically.")
+            save_hashes(new_hashes, baseline_file)
+            print("Baseline updated.")
+        else:
+            choice = input("Do you want to update the baseline with current state? (y/n): ").lower()
+            if choice == "y":
+                save_hashes(new_hashes, baseline_file)
+                print("Baseline updated.")
+            else:
+                print("Baseline NOT updated. Keeping original.")
 
