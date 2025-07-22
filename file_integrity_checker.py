@@ -27,15 +27,21 @@ def load_hashes(input_file):
         return json.load(f)
 
 def compare_hashes(old_hashes, new_hashes):
+    changes_found = False
     for path, old_hash in old_hashes.items():
         new_hash = new_hashes.get(path)
         if not new_hash:
             print(f"File missing: {path}")
+            changes_found = True
         elif old_hash != new_hash:
             print(f"File changed: {path}")
+            changes_found = True
     for path in new_hashes:
         if path not in old_hashes:
             print(f"New file detected: {path}")
+            changes_found = True
+    return changes_found
+
 
 # Main script logic
 if __name__ == "__main__":
@@ -59,8 +65,11 @@ if __name__ == "__main__":
         old_hashes = load_hashes(baseline_file)
         files = get_all_files(directory)
         new_hashes = {f: calculate_hash(f) for f in files}
-        compare_hashes(old_hashes, new_hashes)
-    
+        has_changes = compare_hashes(old_hashes, new_hashes)
+
+    if not has_changes:
+        print("No changes detected. Baseline is up-to-date.")
+    else:    
         if auto_update:
             print("Auto-update mode: updating baseline automatically.")
             save_hashes(new_hashes, baseline_file)
