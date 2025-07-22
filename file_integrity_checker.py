@@ -1,19 +1,20 @@
+# Importing standard libraries: os for file operations, hashlib for hashing, json for saving/loading data
 import os
 import hashlib
 import json
 
-def get_all_files(directory):
-    file_paths = []
-    for root, dirs, files in os.walk(directory):
+def get_all_files(directory):       # Returns a list of all file paths under the given directory (recursively)
+    file_paths = []                 # Creates an empty list to hold file paths.
+    for root, dirs, files in os.walk(directory):        # Walks through the directory tree. os.walk function yields- root: current folder path , dirs: list of subdirectories , files: list of filenames in root.
         for filename in files:
-            file_paths.append(os.path.join(root, filename))
+            file_paths.append(os.path.join(root, filename))         # Build full file path and add to list
     return file_paths
 
 def calculate_hash(filepath):
     hasher = hashlib.sha256()
-    with open(filepath, 'rb') as f:
+    with open(filepath, 'rb') as f:         # Open file in binary mode
         for chunk in iter(lambda: f.read(4096), b''):
-            hasher.update(chunk)
+            hasher.update(chunk)            # Reads files in chunks and updates hash
     return hasher.hexdigest()
 
 def save_hashes(hash_dict, output_file):
@@ -35,6 +36,7 @@ def compare_hashes(old_hashes, new_hashes):
         if path not in old_hashes:
             print(f"New file detected: {path}")
 
+# Main script logic
 if __name__ == "__main__":
     directory = input("Enter the directory to scan: ")
     baseline_file = "hashes.json"
