@@ -20,5 +20,19 @@ def save_hashes(hash_dict, output_file):
     with open(output_file, 'w') as f:
         json.dump(hash_dict, f, indent=4)
 
+def load_hashes(input_file):
+    with open(input_file, 'r') as f:
+        return json.load(f)
+
+def compare_hashes(old_hashes, new_hashes):
+    for path, old_hash in old_hashes.items():
+        new_hash = new_hashes.get(path)
+        if not new_hash:
+            print(f"File missing: {path}")
+        elif old_hash != new_hash:
+            print(f"File changed: {path}")
+    for path in new_hashes:
+        if path not in old_hashes:
+            print(f"New file detected: {path}")
 
 
