@@ -35,4 +35,22 @@ def compare_hashes(old_hashes, new_hashes):
         if path not in old_hashes:
             print(f"New file detected: {path}")
 
+if __name__ == "__main__":
+    directory = input("Enter the directory to scan: ")
+    baseline_file = "hashes.json"
+
+    if not os.path.exists(baseline_file):
+        print("No baseline found. Creating baseline...")
+        files = get_all_files(directory)
+        hashes = {f: calculate_hash(f) for f in files}
+        save_hashes(hashes, baseline_file)
+        print("Baseline saved.")
+    else:
+        print("Baseline found. Checking for changes...")
+        old_hashes = load_hashes(baseline_file)
+        files = get_all_files(directory)
+        new_hashes = {f: calculate_hash(f) for f in files}
+        compare_hashes(old_hashes, new_hashes)
+
+
 
