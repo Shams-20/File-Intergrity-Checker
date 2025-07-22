@@ -1,0 +1,8 @@
+import os
+
+def get_all_files(directory):
+    file_paths = []
+    for root, dirs, files in os.walk(directory):
+        for filename in files:
+            file_paths.append(os.path.join(root, filename))
+    return file_paths
