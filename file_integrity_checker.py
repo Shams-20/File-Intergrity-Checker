@@ -80,5 +80,5 @@ if __name__ == "__main__":
                 save_hashes(new_hashes, baseline_file)
                 print("Baseline updated.")
             else:
-                print("Baseline NOT updated. Keeping original.")
+                print("Baseline NOT updated. Keeping the original.")
 
