@@ -1,130 +1,126 @@
-File Integrity Monitoring Tool
+# 🛡️ File Integrity Monitoring Tool
 
-This project is a lightweight Python-based tool that performs file integrity checking by creating and comparing file hashes. It is designed to help detect unauthorized changes, deletions, or additions in a specified directory.
+A lightweight Python-based integrity checker that keeps your files in check and your folders honest. Perfect for spotting sneaky changes, deletions, or weird file drop-ins in any directory you care about.
 
-Features
+---
 
-Recursive file scanning within a given directory
+## Features
 
-SHA-256 hash calculation for all files
+- Recursive scanning of all files in a directory
+- Calculates secure SHA-256 hashes
+- Creates a baseline of the current file state
+- Detects:
+  - Modified files
+  - Deleted/missing files
+  - Newly added files
+- Option to auto-update the baseline using a flag
+- Human-readable CLI output
 
-Baseline creation for initial integrity state
+---
 
-Change detection for:
+## Requirements
 
-Modified files
+- Python 3.6 or higher
+- No third-party libraries needed, 100% standard library
 
-Deleted files
+---
 
-Newly added files
+## Installation
 
-Optional auto-update of baseline using command-line flag
+Clone this bad boy:
 
-Clear CLI reporting of integrity status
-
-Getting Started
-
-Requirements
-
-Python 3.6 or higher
-
-No external dependencies
-
-Installation
-
-Clone the repository:
-
+```bash
 git clone https://github.com/your-username/file-integrity-monitor.git
 cd file-integrity-monitor
+```
 
-Run the script:
+---
 
+## Usage
+
+### Basic Mode
+
+```bash
 python file_integrity_checker.py
+```
 
-Usage
+You'll be prompted to enter the directory to scan. If it's your first time, it'll create a baseline. Every time after that, it’ll compare your current files to the saved baseline.
 
-🔹 Initial Baseline Creation
+### Auto-Update Mode
 
-When you run the tool for the first time, it asks for a directory and creates a baseline of hashes (hashes.json).
-
-python file_integrity_checker.py
-
-You'll see:
-
-Enter the directory to scan: /path/to/your/folder
-No baseline found. Creating baseline...
-Baseline saved.
-
-🔹 Detecting Changes
-
-On next run, it compares the current state to the saved one and reports any:
-
-🔄 Modified files
-
-❌ Deleted files
-
-🆕 New files
-
-python file_integrity_checker.py
-
-Example output:
-
-Baseline found. Checking for changes...
-File changed: /folder/doc.txt
-New file detected: /folder/image.png
-File missing: /folder/old_data.csv
-
-You’ll be asked:
-
-Do you want to update the baseline with current state? (y/n):
-
-🔹 Auto-Update Mode
-
-Skip the prompt and update the baseline automatically:
-
+```bash
 python file_integrity_checker.py --auto-update
+```
 
-Output:
+Runs the same comparison, but will **automatically update** the baseline if any changes are detected.
 
+---
+
+## How It Works
+
+1. **First Run:**  
+   - You give it a directory.
+   - It hashes all files inside (recursively).
+   - It saves that state in a `hashes.json` file.
+
+2. **Later Runs:**  
+   - It re-hashes everything.
+   - Compares the new hashes with the old ones.
+   - Reports:
+     - 🔄 Changed files
+     - ❌ Missing files
+     - ➕ New files
+   - You choose to update the baseline or keep it.
+
+---
+
+## Example Output
+
+```
+Enter the directory to scan: C:\Users\Example\Documents
+Baseline found. Checking for changes...
+File changed: C:\Users\Example\Documents\resume.docx
+New file detected: C:\Users\Example\Documents\secret_notes.txt
+Do you want to update the baseline with current state? (y/n): 
+```
+
+Or with auto-update:
+```
+Baseline found. Checking for changes...
+File missing: C:\Important\config.json
 Auto-update mode: updating baseline automatically.
 Baseline updated.
+```
 
-🔧 How It Works
+---
 
-File Collection: Recursively walks the specified directory.
+## Test It Yourself
 
-Hash Calculation: Computes SHA-256 hashes of all files.
+Try this:
+1. Run the script in a folder.
+2. Add, delete, or change a file.
+3. Run it again and watch it catch the change!
 
-Baseline: Saves these hashes to hashes.json.
+---
 
-Comparison: On next run, checks for differences from the saved baseline.
+## File Structure
 
-📄 Example
+```
+file-integrity-monitor/
+├── file_integrity_checker.py
+├── hashes.json   ← Generated on first run
+└── README.md
+```
 
-$ python file_integrity_checker.py
-Enter the directory to scan: ./important_folder
-Baseline found. Checking for changes...
-File changed: ./important_folder/summary.docx
-File missing: ./important_folder/old_config.json
-New file detected: ./important_folder/new_image.png
+---
 
-📚 Future Improvements
+## 🧾 License
 
-Integration with SIEM tools (Splunk, ELK)
+MIT - do what you want, just don’t pretend you built it from scratch 😘
 
-Threat intelligence using YARA rules
+---
 
-Timestamp manipulation and file permission checks
+## 💬 Contact
 
-PDF/HTML reporting
-
-Real-time monitoring agent
-
-✉️ Contact
-
-For questions, reach out to your-email@example.com or raise an issue in the repo.
-
-✅ License
-
-MIT License. See LICENSE file for details.
+Got beef, bugs, or billion-dollar job offers? Hit me up at `shamsxshaikh@gmail.com`.
 
