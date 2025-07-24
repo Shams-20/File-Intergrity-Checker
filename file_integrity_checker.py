@@ -8,7 +8,7 @@ def get_all_files(directory):       # Returns a list of all file paths under the
     file_paths = []                 # Creates an empty list to hold file paths.
     for root, dirs, files in os.walk(directory):        # Walks through the directory tree. os.walk function yields- root: current folder path , dirs: list of subdirectories , files: list of filenames in root.
         for filename in files:
-            file_paths.append(os.path.join(root, filename))         # Build full file path and add to list
+            file_paths.append(os.path.join(root, filename))         # Builds full file path and add to list
     return file_paths
 
 def calculate_hash(filepath):
