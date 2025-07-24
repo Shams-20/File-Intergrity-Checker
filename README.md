@@ -2,7 +2,6 @@
 
 A lightweight Python-based integrity checker that keeps your files in check and your folders honest. Perfect for spotting sneaky changes, deletions, or weird file drop-ins in any directory you care about.
 
----
 
 ## Features
 
@@ -16,14 +15,12 @@ A lightweight Python-based integrity checker that keeps your files in check and 
 - Option to auto-update the baseline using a flag
 - Human-readable CLI output
 
----
 
 ## Requirements
 
 - Python 3.6 or higher
 - No third-party libraries needed, 100% standard library
 
----
 
 ## Installation
 
@@ -34,7 +31,6 @@ git clone https://github.com/your-username/file-integrity-monitor.git
 cd file-integrity-monitor
 ```
 
----
 
 ## Usage
 
@@ -54,7 +50,6 @@ python file_integrity_checker.py --auto-update
 
 Runs the same comparison, but will **automatically update** the baseline if any changes are detected.
 
----
 
 ## How It Works
 
@@ -72,7 +67,6 @@ Runs the same comparison, but will **automatically update** the baseline if any 
      - ➕ New files
    - You choose to update the baseline or keep it.
 
----
 
 ## Example Output
 
@@ -92,7 +86,6 @@ Auto-update mode: updating baseline automatically.
 Baseline updated.
 ```
 
----
 
 ## Test It Yourself
 
@@ -101,7 +94,6 @@ Try this:
 2. Add, delete, or change a file.
 3. Run it again and watch it catch the change!
 
----
 
 ## File Structure
 
@@ -112,13 +104,11 @@ file-integrity-monitor/
 └── README.md
 ```
 
----
 
 ## 🧾 License
 
 MIT - do what you want, just don’t pretend you built it from scratch 😘
 
----
 
 ## 💬 Contact
 
