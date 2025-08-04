@@ -27,7 +27,7 @@ A lightweight Python-based integrity checker that keeps your files in check and 
 Clone this bad boy:
 
 ```bash
-git clone https://github.com/your-username/file-integrity-monitor.git
+git clone https://github.com/shams-20/file-integrity-monitor.git
 cd file-integrity-monitor
 ```
 
